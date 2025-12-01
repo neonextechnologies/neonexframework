@@ -13,29 +13,36 @@ import (
 	"neonexcore/pkg/logger"
 	"neonexcore/pkg/module"
 	"neonexcore/pkg/rbac"
+	
+	"neonexframework/modules/frontend"
+	"neonexframework/modules/web"
 )
 
 func main() {
 	fmt.Println("=====================================")
-	fmt.Println("NeonEx Framework v0.1.0")
+	fmt.Println("NeonEx Framework v0.2.0")
 	fmt.Println("Full-Stack Go Framework")
 	fmt.Println("=====================================")
 	fmt.Println()
 
-	// Register core module factories
+	// Register core modules
 	core.ModuleMap["user"] = func() core.Module { return coreUser.New() }
 	core.ModuleMap["admin"] = func() core.Module { return coreAdmin.New() }
-
-	app := core.NewApp()
-
+	
+	// Register framework modules
+	core.ModuleMap["frontend"] = func() core.Module { return frontend.New() }
 	// Initialize Logger
 	loggerConfig := logger.LoadConfig()
 	if err := app.InitLogger(loggerConfig); err != nil {
 		log.Fatalf("Failed to initialize logger: %v", err)
 	}
-	app.Logger.Info("Logger initialized successfully")
+	app.Logger.Info("✓ Logger initialized")
 
 	// Initialize Database
+	if err := app.InitDatabase(); err != nil {
+		log.Fatalf("Failed to initialize database: %v", err)
+	}
+	app.Logger.Info("✓ Database connected")
 	if err := app.InitDatabase(); err != nil {
 		log.Fatalf("Failed to initialize database: %v", err)
 	}
@@ -68,7 +75,7 @@ func main() {
 	if err := app.AutoMigrate(); err != nil {
 		log.Fatalf("Failed to run migrations: %v", err)
 	}
-	app.Logger.Info("Migrations completed successfully")
+	app.Logger.Info("✓ Migrations completed")
 
 	// Seed RBAC data
 	ctx := context.Background()
@@ -141,20 +148,6 @@ func seedUserPermissions(ctx context.Context, rbacManager *rbac.Manager) error {
 			Name:        "Delete Users",
 			Slug:        "users.delete",
 			Description: "Delete users",
-			Module:      "user",
-			Category:    "users",
-		},
-		{
-			Name:        "Manage User Roles",
-			Slug:        "users.manage-roles",
-			Description: "Assign and remove roles from users",
-			Module:      "user",
-			Category:    "users",
-		},
-		{
-			Name:        "Manage User Permissions",
-			Slug:        "users.manage-permissions",
-			Description: "Assign and remove permissions from users",
 			Module:      "user",
 			Category:    "users",
 		},

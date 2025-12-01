@@ -6,11 +6,11 @@
 ![Go Version](https://img.shields.io/badge/Go-1.21+-00ADD8?style=for-the-badge&logo=go)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-**Full-Stack Go Framework for Modern Web Applications**
+**Modern Full-Stack Go Framework**
 
-*Build CMS, Admin Panels, E-commerce, and More*
+*Fast • Scalable • Production-Ready*
 
-[Features](#-features) • [Quick Start](#-quick-start) • [Documentation](#-documentation) • [Examples](#-examples)
+[Features](#-features) • [Quick Start](#-quick-start) • [Documentation](./docs) • [Core](./core)
 
 </div>
 
@@ -18,41 +18,47 @@
 
 ## ✨ Overview
 
-**NeonEx Framework** เป็น full-stack framework ที่สร้างจาก [NeonEx Core](./core) ออกแบบมาเพื่อพัฒนาแอปพลิเคชันที่ซับซ้อนได้อย่างรวดเร็ว พร้อม built-in modules สำหรับ:
+**NeonEx Framework** เป็น full-stack Go framework ที่สร้างจาก [NeonEx Core](https://github.com/neonextechnologies/neonexcore) ออกแบบมาเพื่อพัฒนาแอปพลิเคชันเว็บที่ทันสมัย รวดเร็ว และครบครัน
 
-- 🎨 **CMS (Content Management System)** - จัดการเนื้อหาแบบครบวงจร
-- 👑 **Admin Panel** - ระบบจัดการหลังบ้านที่สวยงาม
-- 🛒 **E-commerce** - ระบบขายสินค้าออนไลน์แบบครบครัน
-- 📱 **API Platform** - RESTful & GraphQL APIs
-- 🔐 **Authentication** - ระบบยืนยันตัวตนแบบครบวงจร
+### ทำไมต้อง NeonEx Framework?
+
+- 🚀 **Performance** - สร้างจาก Go เพื่อความเร็วสูงสุด (10,000+ req/sec)
+- 🎯 **Full-Stack** - ทุกอย่างที่ต้องการสำหรับสร้างเว็บแอปพลิเคชัน
+- 🏗️ **Modular** - ระบบ module ที่ยืดหยุ่น ขยายได้ง่าย
+- 🔐 **Secure** - มาพร้อม Authentication, Authorization, RBAC
+- 📦 **Complete** - Database, API, WebSocket, GraphQL, และอื่นๆ
+- 🎨 **Frontend Ready** - รองรับ template engine และ asset management
+- 🧪 **Testable** - Built-in testing utilities
+- 🚢 **Production Ready** - Deploy เป็น single binary
 
 ---
 
 ## 🎯 Key Features
 
-### Full-Stack Capabilities
-- **🎨 Frontend Support** - Template engine with HTML/Go templates
-- **📦 Asset Pipeline** - CSS/JS bundling and minification
-- **🖼️ Media Management** - Upload, resize, and serve images
-- **📝 WYSIWYG Editor** - Rich text editing with TinyMCE/CKEditor
-- **🎭 Theme System** - Multiple themes with easy switching
+### Core Framework (from NeonEx Core)
+- **🎨 Modular Architecture** - Self-contained modules with dependency injection
+- **⚡ High Performance** - Built on Fiber v2 (10,000+ req/sec)
+- **💉 Dependency Injection** - Type-safe DI container with auto-resolution
+- **🔐 Authentication & Authorization** - JWT + RBAC out of the box
+- **📊 ORM Integration** - GORM with PostgreSQL, MySQL, SQLite support
+- **🔄 Auto-Migration** - Database schema management
+- **🗄️ Generic Repository** - Type-safe CRUD operations
 
-### Built-in Modules
-- **👤 User Management** - Complete user system with profiles
-- **👑 Admin Dashboard** - Beautiful admin interface
-- **📄 CMS Core** - Pages, posts, categories, tags
-- **🛒 E-commerce** - Products, cart, orders, payments
-- **📧 Email System** - Templates and queue management
-- **🔔 Notifications** - In-app and push notifications
-- **📊 Analytics** - Track visitors and user behavior
-- **🔍 Search Engine** - Full-text search with filters
+### Advanced Features
+- **🌐 WebSocket Support** - Real-time bidirectional communication
+- **📡 GraphQL API** - Schema-first GraphQL with subscriptions
+- **🚀 gRPC/Microservices** - High-performance RPC
+- **🗄️ Multi-level Caching** - Redis integration
+- **📊 Metrics & Monitoring** - Prometheus metrics
+- **🔍 Full-text Search** - Search capabilities
+- **📧 Email System** - SMTP integration
+- **📝 Logging** - Structured logging with Zap
 
-### Developer Experience
-- **🚀 Quick Setup** - Get started in minutes
-- **🎨 Code Generation** - Generate CRUD modules instantly
-- **📖 Comprehensive Docs** - Detailed documentation
-- **🔥 Hot Reload** - Fast development workflow
-- **🧪 Testing Suite** - Built-in testing utilities
+### Frontend Support
+- **🎨 Template Engine** - HTML template rendering
+- **📦 Asset Pipeline** - CSS/JS bundling และ minification
+- **🖼️ Theme System** - Multiple themes support
+- **📱 Responsive** - Mobile-ready
 
 ---
 
@@ -76,30 +82,31 @@ go mod download
 
 # 3. Set up environment
 cp .env.example .env
-# แก้ไข .env ตามการตั้งค่าของคุณ
+# Edit .env with your database credentials
 
-# 4. Run migrations
-go run main.go migrate
-
-# 5. Start the server
-go run main.go serve
+# 4. Run the application
+go run main.go
 ```
 
-### First Steps
+### First API Request
 
 ```bash
-# เข้าถึง Admin Panel
-http://localhost:8080/admin
+# Register a user
+curl -X POST http://localhost:8080/api/v1/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "secret123"
+  }'
 
-# Default credentials
-Username: admin@example.com
-Password: admin123
-
-# API Endpoint
-http://localhost:8080/api/v1
-
-# Frontend
-http://localhost:8080
+# Login
+curl -X POST http://localhost:8080/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "john@example.com",
+    "password": "secret123"
+  }'
 ```
 
 ---
@@ -108,231 +115,173 @@ http://localhost:8080
 
 ```
 neonexframework/
-├── core/                    # NeonEx Core (submodule)
-│   ├── internal/           # Core framework
-│   ├── pkg/                # Shared packages
-│   └── modules/            # Core modules
+├── core/                   # NeonEx Core (dependency)
+│   ├── internal/          # Core framework internals
+│   ├── modules/           # Built-in modules (user, admin)
+│   └── pkg/               # Public packages
 │
-├── modules/                # Application modules
-│   ├── cms/                # CMS module
-│   │   ├── pages/         # Page management
-│   │   ├── posts/         # Blog posts
-│   │   ├── media/         # Media library
-│   │   └── categories/    # Content categories
-│   │
-│   ├── ecommerce/          # E-commerce module
-│   │   ├── products/      # Product catalog
-│   │   ├── cart/          # Shopping cart
-│   │   ├── orders/        # Order management
-│   │   └── payments/      # Payment processing
-│   │
-│   ├── admin/              # Admin panel module
-│   │   ├── dashboard/     # Admin dashboard
-│   │   ├── settings/      # System settings
-│   │   └── analytics/     # Analytics view
-│   │
-│   └── frontend/           # Frontend module
-│       ├── themes/        # Theme system
-│       ├── layouts/       # Layout templates
-│       └── components/    # Reusable components
+├── modules/               # Framework modules
+│   ├── frontend/         # Template & asset management
+│   ├── web/              # Web utilities
+│   └── [your-modules]/   # Your custom modules
 │
-├── public/                 # Static files
-│   ├── css/               # Stylesheets
-│   ├── js/                # JavaScript
-│   ├── images/            # Images
-│   └── uploads/           # User uploads
+├── public/               # Static files
+│   ├── css/             # Stylesheets
+│   ├── js/              # JavaScript
+│   ├── images/          # Images
+│   └── uploads/         # User uploads
 │
-├── templates/              # HTML templates
-│   ├── admin/             # Admin templates
-│   ├── frontend/          # Frontend templates
-│   └── layouts/           # Layout templates
+├── templates/            # HTML templates
+│   ├── layouts/         # Layout templates
+│   └── frontend/        # Frontend templates
 │
-├── config/                 # Configuration files
-│   ├── app.yaml           # Application config
-│   ├── database.yaml      # Database config
-│   └── modules.yaml       # Module config
+├── storage/              # Storage directory
+│   ├── logs/            # Application logs
+│   ├── cache/           # Cache files
+│   └── uploads/         # Uploaded files
 │
-├── storage/                # Storage directory
-│   ├── logs/              # Application logs
-│   ├── cache/             # Cache files
-│   └── sessions/          # Session data
+├── scripts/              # Utility scripts
+│   ├── update-core.sh   # Update core (Bash)
+│   └── update-core.ps1  # Update core (PowerShell)
 │
-├── tests/                  # Tests
-│   ├── unit/              # Unit tests
-│   ├── integration/       # Integration tests
-│   └── e2e/               # E2E tests
-│
-├── docs/                   # Documentation
-├── go.mod                  # Go modules
-├── go.sum                  # Dependency checksums
-├── main.go                 # Application entry
-├── Makefile               # Build commands
-└── README.md              # This file
+├── docs/                 # Documentation
+├── tests/                # Tests
+├── go.mod                # Go modules
+├── main.go               # Application entry
+├── Makefile             # Build commands
+└── README.md            # This file
 ```
 
 ---
 
-## 🎨 Modules
+## 💡 Usage Examples
 
-### 1. CMS Module
-
-จัดการเนื้อหาแบบครบวงจร:
+### Basic Web Application
 
 ```go
-// สร้าง page ใหม่
-page := &cms.Page{
-    Title:       "About Us",
-    Slug:        "about",
-    Content:     "<p>Welcome to our site</p>",
-    Template:    "default",
-    Status:      "published",
-    SEOTitle:    "About Us | Company",
-    SEOKeywords: "about, company",
+package main
+
+import (
+    "github.com/gofiber/fiber/v2"
+    "neonexcore/internal/core"
+)
+
+func main() {
+    app := core.NewApp()
+    
+    // Auto-discovers and loads modules
+    // Sets up database, logging, routing
+    
+    app.Run() // Starts server on :8080
 }
-pageService.Create(ctx, page)
+```
 
-// สร้าง blog post
-post := &cms.Post{
-    Title:      "Getting Started",
-    Slug:       "getting-started",
-    Content:    "Content here...",
-    Category:   "tutorials",
-    Tags:       []string{"go", "framework"},
-    AuthorID:   1,
-    Status:     "published",
+### Creating a Custom Module
+
+```go
+// modules/blog/module.go
+package blog
+
+import (
+    "github.com/gofiber/fiber/v2"
+    "neonexcore/internal/core"
+)
+
+type BlogModule struct{}
+
+func New() *BlogModule {
+    return &BlogModule{}
 }
-postService.Create(ctx, post)
-```
 
-**Features:**
-- ✅ Page Management
-- ✅ Blog/Posts
-- ✅ Categories & Tags
-- ✅ Media Library
-- ✅ SEO Optimization
-- ✅ Content Versioning
-- ✅ Draft/Published workflow
-
-### 2. E-commerce Module
-
-ระบบขายสินค้าออนไลน์:
-
-```go
-// สร้างสินค้า
-product := &ecommerce.Product{
-    Name:        "Premium T-Shirt",
-    SKU:         "TS-001",
-    Price:       599.00,
-    Category:    "clothing",
-    Stock:       100,
-    Images:      []string{"image1.jpg", "image2.jpg"},
-    Description: "High quality cotton t-shirt",
+func (m *BlogModule) Name() string {
+    return "blog"
 }
-productService.Create(ctx, product)
 
-// จัดการ cart
-cart.AddItem(productID, quantity)
-cart.UpdateItem(itemID, quantity)
-cart.RemoveItem(itemID)
+func (m *BlogModule) RegisterServices(c *core.Container) error {
+    c.Provide(NewBlogRepository)
+    c.Provide(NewBlogService)
+    c.Provide(NewBlogController)
+    return nil
+}
 
-// สร้าง order
-order := orderService.CreateFromCart(ctx, cart)
-orderService.ProcessPayment(ctx, order.ID, paymentMethod)
+func (m *BlogModule) RegisterRoutes(router fiber.Router) error {
+    api := router.Group("/api/v1/blog")
+    
+    ctrl := core.Resolve[*BlogController]()
+    
+    api.Get("/posts", ctrl.List)
+    api.Get("/posts/:id", ctrl.Get)
+    api.Post("/posts", ctrl.Create)
+    api.Put("/posts/:id", ctrl.Update)
+    api.Delete("/posts/:id", ctrl.Delete)
+    
+    return nil
+}
+
+func (m *BlogModule) Boot() error {
+    return nil
+}
 ```
 
-**Features:**
-- ✅ Product Catalog
-- ✅ Shopping Cart
-- ✅ Order Management
-- ✅ Payment Integration (Stripe, PayPal, etc.)
-- ✅ Inventory Management
-- ✅ Shipping Methods
-- ✅ Discount/Coupon System
-- ✅ Customer Reviews
-
-### 3. Admin Panel Module
-
-ระบบจัดการหลังบ้าน:
+### Using Repository Pattern
 
 ```go
-// Dashboard metrics
-metrics := dashboardService.GetMetrics(ctx)
-// Returns: visitors, revenue, orders, users
+// Generic repository with type safety
+repo := database.NewBaseRepository[Post](db)
 
-// System settings
-settingsService.Set(ctx, "site.name", "My Website")
-settingsService.Set(ctx, "site.logo", "/uploads/logo.png")
+// CRUD operations
+posts, _ := repo.FindAll(ctx)
+post, _ := repo.FindByID(ctx, 1)
+repo.Create(ctx, &newPost)
+repo.Update(ctx, &post)
+repo.Delete(ctx, 1)
 
-// Analytics
-analytics.TrackPageView(ctx, "/products")
-analytics.TrackEvent(ctx, "purchase", data)
+// With conditions
+posts, _ := repo.FindWhere(ctx, "published = ?", true)
+
+// Pagination
+posts, total, _ := repo.Paginate(ctx, 1, 20)
 ```
 
-**Features:**
-- ✅ Beautiful Dashboard
-- ✅ User Management
-- ✅ Role & Permissions
-- ✅ System Settings
-- ✅ Analytics & Reports
-- ✅ Audit Logs
-- ✅ Database Backup
-- ✅ Email Templates
-
-### 4. Frontend Module
-
-ระบบ frontend ที่ยืดหยุ่น:
+### Dependency Injection
 
 ```go
-// Theme system
-themeManager.SetActiveTheme("default")
-themeManager.LoadTheme(themeName)
+// Register services
+container.Provide(NewDatabase)
+container.Provide(NewUserRepository)
+container.Provide(NewUserService)
 
-// Render template
-return c.Render("home", fiber.Map{
-    "Title": "Home Page",
-    "Posts": posts,
-})
+// Auto-resolve with dependencies
+service := container.Resolve[*UserService]()
+// Dependencies automatically injected
 ```
-
-**Features:**
-- ✅ Theme System
-- ✅ Layout Templates
-- ✅ Component Library
-- ✅ Asset Pipeline
-- ✅ SEO Tools
-- ✅ Multi-language Support
 
 ---
 
 ## 🛠️ Development
 
-### Creating a New Module
+### Hot Reload
 
 ```bash
-# Generate complete module
+make dev
+```
+
+### Running Tests
+
+```bash
+make test
+```
+
+### Code Generation
+
+```bash
+# Generate a new module
 go run main.go make:module blog
 
 # Generate specific components
 go run main.go make:model Post
 go run main.go make:service PostService
 go run main.go make:controller PostController
-go run main.go make:repository PostRepository
-```
-
-### Running Tests
-
-```bash
-# Run all tests
-go test ./...
-
-# Run specific module tests
-go test ./modules/cms/...
-
-# With coverage
-go test -cover ./...
-
-# Integration tests
-go test -tags=integration ./tests/integration/...
 ```
 
 ### Database Migrations
@@ -346,139 +295,82 @@ go run main.go migrate:down
 
 # Create new migration
 go run main.go make:migration create_posts_table
-
-# Seed database
-go run main.go db:seed
 ```
 
 ---
 
 ## 📚 Documentation
 
-ดูเอกสารฉบับเต็มได้ที่:
-
-- [Installation Guide](./docs/installation.md)
-- [Getting Started](./docs/getting-started.md)
-- [CMS Module](./docs/modules/cms.md)
-- [E-commerce Module](./docs/modules/ecommerce.md)
-- [Admin Panel](./docs/modules/admin.md)
-- [API Reference](./docs/api-reference.md)
-- [Deployment](./docs/deployment.md)
+- **[Getting Started](./docs/getting-started.md)** - เริ่มต้นใช้งาน
+- **[Core Management](./docs/core-management.md)** - จัดการ core dependency
+- **[Module Development](./docs/module-development.md)** - สร้าง custom modules
+- **[API Reference](./docs/api-reference.md)** - API documentation
+- **[Deployment](./docs/deployment.md)** - การ deploy production
 
 ---
 
-## 🎨 Examples
+## 🔄 Updating Core
 
-### Example 1: Simple CMS
+NeonEx Framework ใช้ [neonexcore](https://github.com/neonextechnologies/neonexcore) เป็น dependency ซึ่งจัดเก็บไว้ใน `/core` directory
 
-```go
-package main
+### Update Core to Latest Version
 
-import (
-    "github.com/neonextechnologies/neonexframework/core"
-    "github.com/neonextechnologies/neonexframework/modules/cms"
-)
+```bash
+# Using Make (recommended)
+make update-core
 
-func main() {
-    app := core.NewApp()
-    
-    // Load CMS module
-    app.LoadModule(cms.New())
-    
-    app.Run()
-}
+# Or manually
+# Windows
+powershell -ExecutionPolicy Bypass -File scripts/update-core.ps1
+
+# Linux/Mac
+bash scripts/update-core.sh
 ```
 
-### Example 2: E-commerce Store
+The update script will:
+1. Backup current core
+2. Clone latest neonexcore
+3. Clean unnecessary files
+4. Run tests
+5. Restore backup if tests fail
 
-```go
-package main
+See [Core Management Guide](./docs/core-management.md) for details.
 
-import (
-    "github.com/neonextechnologies/neonexframework/core"
-    "github.com/neonextechnologies/neonexframework/modules/ecommerce"
-)
+---
 
-func main() {
-    app := core.NewApp()
-    
-    // Load E-commerce module
-    app.LoadModule(ecommerce.New())
-    
-    // Configure payment gateways
-    app.Config.Set("payment.stripe.key", "sk_test_...")
-    
-    app.Run()
-}
+## 🏗️ Architecture
+
 ```
-
-### Example 3: Complete Application
-
-```go
-package main
-
-import (
-    "github.com/neonextechnologies/neonexframework/core"
-    "github.com/neonextechnologies/neonexframework/modules/cms"
-    "github.com/neonextechnologies/neonexframework/modules/ecommerce"
-    "github.com/neonextechnologies/neonexframework/modules/admin"
-)
-
-func main() {
-    app := core.NewApp()
-    
-    // Load all modules
-    app.LoadModules(
-        cms.New(),
-        ecommerce.New(),
-        admin.New(),
-    )
-    
-    app.Run()
-}
+┌─────────────────────────────────────────┐
+│       Your Application                   │
+│   (Custom Modules & Business Logic)     │
+├─────────────────────────────────────────┤
+│         NeonEx Framework                 │
+│  (Frontend, Web Utilities, Templates)   │
+├─────────────────────────────────────────┤
+│         NeonEx Core                      │
+│  (Framework Core with 20+ Components)   │
+├─────────────────────────────────────────┤
+│    Fiber + GORM + Zap + Redis...        │
+└─────────────────────────────────────────┘
 ```
 
 ---
 
-## 🌟 Comparison
+## 🌟 What Can You Build?
 
-| Feature | NeonEx Framework | Laravel | Django | Rails |
-|---------|-----------------|---------|--------|-------|
-| **Language** | Go | PHP | Python | Ruby |
-| **Performance** | ⚡ 10,500 req/s | 1,200 req/s | 3,500 req/s | 2,800 req/s |
-| **Memory** | 50MB | 120MB | 90MB | 100MB |
-| **Built-in CMS** | ✅ | ❌ | ✅ | ❌ |
-| **Built-in E-commerce** | ✅ | ❌ | ❌ | ❌ |
-| **Admin Panel** | ✅ | ❌ | ✅ | ✅ |
-| **Hot Reload** | ✅ | ✅ | ✅ | ✅ |
-| **Single Binary** | ✅ | ❌ | ❌ | ❌ |
+NeonEx Framework เหมาะสำหรับสร้าง:
 
----
-
-## 🗺️ Roadmap
-
-### ✅ Version 0.1 (Current)
-- [x] Core framework integration
-- [x] Basic project structure
-- [x] Module system setup
-
-### 🔄 Version 0.2 (In Progress)
-- [ ] CMS Module (Pages, Posts, Media)
-- [ ] Admin Panel Module
-- [ ] Frontend Template System
-- [ ] Basic E-commerce
-
-### 🎯 Version 0.3 (Q1 2024)
-- [ ] Complete E-commerce Module
-- [ ] Payment Gateway Integration
-- [ ] Email System
-- [ ] Notification System
-
-### 🚀 Version 1.0 (Q2 2024)
-- [ ] Multi-language Support
-- [ ] Advanced Analytics
-- [ ] Plugin System
-- [ ] Theme Marketplace
+- 📝 **RESTful APIs** - Backend services
+- 🌐 **Web Applications** - Full-stack web apps
+- 📱 **Mobile Backends** - API for mobile apps
+- 🎮 **Real-time Apps** - WebSocket applications
+- 🔄 **Microservices** - Distributed systems
+- 📊 **Admin Dashboards** - Management interfaces
+- 🛒 **E-commerce Platforms** - Online stores
+- 📰 **Content Platforms** - Blogs, news sites
+- 💬 **Social Networks** - Community platforms
+- 🎓 **Learning Management** - Education platforms
 
 ---
 
@@ -486,20 +378,13 @@ func main() {
 
 We welcome contributions!
 
-```bash
-# Fork the repository
-git clone https://github.com/YOUR_USERNAME/neonexframework.git
-cd neonexframework
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-# Create a branch
-git checkout -b feature/my-feature
-
-# Make changes and commit
-git commit -m "Add my feature"
-
-# Push and create PR
-git push origin feature/my-feature
-```
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for details.
 
 ---
 
@@ -509,12 +394,29 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-## 💬 Support
+## 💬 Support & Community
 
-- 📖 **Documentation**: [docs/](./docs)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/neonextechnologies/neonexframework/discussions)
-- 🐛 **Issues**: [GitHub Issues](https://github.com/neonextechnologies/neonexframework/issues)
-- 📧 **Email**: support@neonexframework.dev
+- **Documentation**: [docs/](./docs)
+- **Issues**: [GitHub Issues](https://github.com/neonextechnologies/neonexframework/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/neonextechnologies/neonexframework/discussions)
+- **Core Repository**: [neonexcore](https://github.com/neonextechnologies/neonexcore)
+- **Email**: support@neonexframework.dev
+
+---
+
+## 🙏 Acknowledgments
+
+Built on top of amazing open source projects:
+
+- [NeonEx Core](https://github.com/neonextechnologies/neonexcore) - Framework core
+- [Fiber](https://github.com/gofiber/fiber) - Fast HTTP framework
+- [GORM](https://gorm.io) - ORM library
+- [Zap](https://github.com/uber-go/zap) - Structured logging
+
+Inspired by:
+- [Laravel](https://laravel.com) - Elegant PHP framework
+- [NestJS](https://nestjs.com) - Progressive Node.js framework
+- [Spring Boot](https://spring.io/projects/spring-boot) - Java framework
 
 ---
 
