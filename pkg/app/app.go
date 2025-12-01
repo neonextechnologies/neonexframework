@@ -1,8 +1,9 @@
 package app
 
 import (
-	"github.com/gofiber/fiber/v2"
 	"neonexcore/pkg/logger"
+
+	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
 )
 

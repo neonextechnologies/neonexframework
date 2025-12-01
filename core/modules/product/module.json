@@ -1,0 +1,28 @@
+{
+  "name": "product",
+  "display_name": "Product Management",
+  "description": "Product catalog and inventory management",
+  "version": "1.0.0",
+  "author": "NeonexCore",
+  "homepage": "https://github.com/neonextechnologies/neonexcore",
+  "license": "MIT",
+  "priority": 20,
+  "enabled": false,
+  "dependencies": [
+    {
+      "name": "user",
+      "version": ">=1.0.0",
+      "required": true
+    }
+  ],
+  "routes": true,
+  "migrations": true,
+  "seeders": true,
+  "config": {
+    "default_currency": "USD",
+    "allow_negative_stock": false,
+    "auto_generate_sku": true,
+    "image_max_size": 5242880,
+    "image_allowed_types": ["jpg", "jpeg", "png", "webp"]
+  }
+}

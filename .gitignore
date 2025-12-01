@@ -60,6 +60,9 @@ Thumbs.db
 # Air (hot reload)
 /tmp/
 
+# Core backup
+core.backup/
+
 # Go workspace file
 go.work
 go.work.sum

@@ -7,8 +7,9 @@ import (
 
 	"neonexcore/internal/config"
 	"neonexcore/internal/core"
-	coreAdmin "neonexcore/modules/admin"
-	coreUser "neonexcore/modules/user"
+	"neonexcore/modules/admin"
+	"neonexcore/modules/user"
+	"neonexcore/pkg/api"
 	"neonexcore/pkg/database"
 	"neonexcore/pkg/logger"
 	"neonexcore/pkg/module"
@@ -16,15 +17,11 @@ import (
 )
 
 func main() {
-	fmt.Println("=====================================")
-	fmt.Println("NeonEx Framework v0.1.0")
-	fmt.Println("Full-Stack Go Framework")
-	fmt.Println("=====================================")
-	fmt.Println()
+	fmt.Println("Neonex Core v0.1 starting...")
 
-	// Register core module factories
-	core.ModuleMap["user"] = func() core.Module { return coreUser.New() }
-	core.ModuleMap["admin"] = func() core.Module { return coreAdmin.New() }
+	// Register module factories
+	core.ModuleMap["user"] = func() core.Module { return user.New() }
+	core.ModuleMap["admin"] = func() core.Module { return admin.New() }
 
 	app := core.NewApp()
 
@@ -33,87 +30,64 @@ func main() {
 	if err := app.InitLogger(loggerConfig); err != nil {
 		log.Fatalf("Failed to initialize logger: %v", err)
 	}
-	app.Logger.Info("Logger initialized successfully")
 
 	// Initialize Database
 	if err := app.InitDatabase(); err != nil {
 		log.Fatalf("Failed to initialize database: %v", err)
 	}
-	app.Logger.Info("Database connected successfully")
 
-	// Register core models for auto-migration
+	// Register models for auto-migration
 	app.RegisterModels(
-		// Core User Models
-		&coreUser.User{},
-
-		// RBAC Models
+		&user.User{},
 		&rbac.Role{},
 		&rbac.Permission{},
 		&rbac.UserRole{},
 		&rbac.UserPermission{},
-
-		// Module System Models
 		&module.Module{},
 		&module.ModuleDependency{},
 		&module.ModuleMigration{},
-
-		// Admin Models
-		&coreAdmin.AuditLog{},
-		&coreAdmin.SystemSettings{},
-		&coreAdmin.BackupInfo{},
+		&admin.AuditLog{},
+		&admin.SystemSettings{},
+		&admin.BackupInfo{},
 	)
 
 	// Run auto-migration
-	app.Logger.Info("Running database migrations...")
 	if err := app.AutoMigrate(); err != nil {
 		log.Fatalf("Failed to run migrations: %v", err)
 	}
-	app.Logger.Info("Migrations completed successfully")
 
-	// Seed RBAC data
+	// Seed RBAC data (roles and permissions)
 	ctx := context.Background()
 	rbacManager := rbac.NewManager(config.DB.GetDB())
 	
-	app.Logger.Info("Seeding default roles and permissions...")
+	app.Logger.Info("Seeding default roles...")
 	if err := rbacManager.SeedDefaultRoles(ctx); err != nil {
 		log.Printf("Warning: Failed to seed roles: %v", err)
 	}
 
+	app.Logger.Info("Seeding user permissions...")
 	if err := seedUserPermissions(ctx, rbacManager); err != nil {
 		log.Printf("Warning: Failed to seed permissions: %v", err)
 	}
-	app.Logger.Info("RBAC data seeded successfully")
 
 	// Seed database (optional)
-	app.Logger.Info("Running database seeders...")
 	seeder := database.NewSeederManager(config.DB.GetDB())
-	seeder.Register(coreUser.NewUserSeeder(config.DB.GetDB()))
-	seeder.Register(coreAdmin.NewAdminSeeder(config.DB.GetDB()))
+	seeder.Register(user.NewUserSeeder(config.DB.GetDB()))
+	seeder.Register(admin.NewAdminSeeder(config.DB.GetDB()))
 	if err := seeder.Run(context.Background()); err != nil {
 		log.Printf("Warning: Seeding failed: %v", err)
 	}
-	app.Logger.Info("Database seeding completed")
 
 	// Load modules
-	app.Logger.Info("Loading framework modules...")
 	app.Registry.AutoDiscover()
 	app.Boot()
 	app.Registry.Load()
-	app.Logger.Info("All modules loaded successfully")	// Display startup information
-	fmt.Println()
-	fmt.Println("=====================================")
-	fmt.Println("🚀 Server starting...")
-	fmt.Println("📍 Admin Panel: http://localhost:8080/admin")
-	fmt.Println("📍 API: http://localhost:8080/api/v1")
-	fmt.Println("📍 Health: http://localhost:8080/health")
-	fmt.Println("=====================================")
-	fmt.Println()
 
 	// Start HTTP server
 	app.StartHTTP()
-	// Start HTTP server
-	app.StartHTTP()
-}/ seedUserPermissions seeds default user module permissions
+}
+
+// seedUserPermissions seeds default user module permissions
 func seedUserPermissions(ctx context.Context, rbacManager *rbac.Manager) error {
 	permissions := []rbac.Permission{
 		{

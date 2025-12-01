@@ -1,0 +1,12 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Exclude documentation from git archive (releases/downloads)
+# This keeps docs in repo for GitBook but excludes from user downloads
+docs/ export-ignore
+.gitbook.yaml export-ignore
+
+# Exclude development files
+.vscode/ export-ignore
+.air.toml export-ignore
+Makefile export-ignore

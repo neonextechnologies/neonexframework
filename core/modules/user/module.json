@@ -1,0 +1,25 @@
+{
+  "name": "user",
+  "display_name": "User Management",
+  "description": "User management module with authentication and authorization",
+  "version": "1.0.0",
+  "author": "NeonexCore",
+  "homepage": "https://github.com/neonextechnologies/neonexcore",
+  "license": "MIT",
+  "priority": 10,
+  "enabled": true,
+  "dependencies": [],
+  "routes": true,
+  "migrations": true,
+  "seeders": true,
+  "config": {
+    "jwt_secret": "your-secret-key-here",
+    "jwt_access_token_ttl": 900,
+    "jwt_refresh_token_ttl": 604800,
+    "password_min_length": 8,
+    "password_require_special": true,
+    "email_verification_required": false,
+    "max_login_attempts": 5,
+    "lockout_duration": 900
+  }
+}

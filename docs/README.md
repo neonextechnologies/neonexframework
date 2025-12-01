@@ -8,6 +8,7 @@
 - [Installation](./getting-started.md)
 - [Quick Start](./quick-start.md)
 - [Project Structure](./project-structure.md)
+- [Core Management](./core-management.md)
 
 ### Core Concepts
 - [Module System](./core/modules.md)

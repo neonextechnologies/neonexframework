@@ -1,0 +1,42 @@
+{
+  "name": "admin",
+  "version": "1.0.0",
+  "display_name": "Admin Panel",
+  "description": "Administrative dashboard and system management",
+  "author": "Neonex Team",
+  "license": "MIT",
+  "enabled": true,
+  "dependencies": [
+    {
+      "name": "user",
+      "version": ">=1.0.0",
+      "required": true
+    }
+  ],
+  "permissions": [
+    "admin.dashboard.view",
+    "admin.system.view",
+    "admin.users.manage",
+    "admin.modules.manage",
+    "admin.roles.manage",
+    "admin.settings.manage",
+    "admin.logs.view"
+  ],
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/admin/dashboard",
+      "handler": "DashboardController.GetDashboard"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/stats",
+      "handler": "DashboardController.GetStats"
+    }
+  ],
+  "migrations": [],
+  "seeders": [
+    "AdminSeeder"
+  ],
+  "tags": ["admin", "dashboard", "management"]
+}

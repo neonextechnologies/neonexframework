@@ -6,14 +6,15 @@ MAIN_PATH=./main.go
 
 help: ## แสดงคำสั่งที่ใช้ได้
 	@echo "Available commands:"
-	@echo "  make build      - Build the application"
-	@echo "  make run        - Run the application"
-	@echo "  make test       - Run tests"
-	@echo "  make clean      - Clean build files"
-	@echo "  make install    - Install dependencies"
-	@echo "  make migrate    - Run database migrations"
-	@echo "  make seed       - Seed the database"
-	@echo "  make dev        - Run with hot reload"
+	@echo "  make build        - Build the application"
+	@echo "  make run          - Run the application"
+	@echo "  make test         - Run tests"
+	@echo "  make clean        - Clean build files"
+	@echo "  make install      - Install dependencies"
+	@echo "  make migrate      - Run database migrations"
+	@echo "  make seed         - Seed the database"
+	@echo "  make dev          - Run with hot reload"
+	@echo "  make update-core  - Update neonexcore dependency"
 
 build: ## Build the application
 	@echo "Building $(BINARY_NAME)..."
@@ -100,3 +101,11 @@ security-check: ## Run security check
 		go install github.com/securego/gosec/v2/cmd/gosec@latest; \
 	fi
 	gosec ./...
+
+update-core: ## Update neonexcore dependency
+	@echo "Updating neonexcore..."
+	@if [ "$(OS)" = "Windows_NT" ]; then \
+		powershell -ExecutionPolicy Bypass -File scripts/update-core.ps1; \
+	else \
+		bash scripts/update-core.sh; \
+	fi
