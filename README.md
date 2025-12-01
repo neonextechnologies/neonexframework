@@ -18,18 +18,18 @@
 
 ## ✨ Overview
 
-**NeonEx Framework** เป็น full-stack Go framework ที่สร้างจาก [NeonEx Core](https://github.com/neonextechnologies/neonexcore) ออกแบบมาเพื่อพัฒนาแอปพลิเคชันเว็บที่ทันสมัย รวดเร็ว และครบครัน
+**NeonEx Framework** is a full-stack Go framework built on [NeonEx Core](https://github.com/neonextechnologies/neonexcore), designed for developing modern, fast, and complete web applications.
 
-### ทำไมต้อง NeonEx Framework?
+### Why NeonEx Framework?
 
-- 🚀 **Performance** - สร้างจาก Go เพื่อความเร็วสูงสุด (10,000+ req/sec)
-- 🎯 **Full-Stack** - ทุกอย่างที่ต้องการสำหรับสร้างเว็บแอปพลิเคชัน
-- 🏗️ **Modular** - ระบบ module ที่ยืดหยุ่น ขยายได้ง่าย
-- 🔐 **Secure** - มาพร้อม Authentication, Authorization, RBAC
-- 📦 **Complete** - Database, API, WebSocket, GraphQL, และอื่นๆ
-- 🎨 **Frontend Ready** - รองรับ template engine และ asset management
+- 🚀 **Performance** - Built with Go for maximum speed (10,000+ req/sec)
+- 🎯 **Full-Stack** - Everything you need to build web applications
+- 🏗️ **Modular** - Flexible module system, easy to extend
+- 🔐 **Secure** - Comes with Authentication, Authorization, RBAC
+- 📦 **Complete** - Database, API, WebSocket, GraphQL, and more
+- 🎨 **Frontend Ready** - Support for template engine and asset management
 - 🧪 **Testable** - Built-in testing utilities
-- 🚢 **Production Ready** - Deploy เป็น single binary
+- 🚢 **Production Ready** - Deploy as a single binary
 
 ---
 
@@ -56,7 +56,7 @@
 
 ### Frontend Support
 - **🎨 Template Engine** - HTML template rendering
-- **📦 Asset Pipeline** - CSS/JS bundling และ minification
+- **📦 Asset Pipeline** - CSS/JS bundling and minification
 - **🖼️ Theme System** - Multiple themes support
 - **📱 Responsive** - Mobile-ready
 
@@ -301,17 +301,17 @@ go run main.go make:migration create_posts_table
 
 ## 📚 Documentation
 
-- **[Getting Started](./docs/getting-started.md)** - เริ่มต้นใช้งาน
-- **[Core Management](./docs/core-management.md)** - จัดการ core dependency
-- **[Module Development](./docs/module-development.md)** - สร้าง custom modules
+- **[Getting Started](./docs/getting-started.md)** - Start using the framework
+- **[Core Management](./docs/core-management.md)** - Manage core dependency
+- **[Module Development](./docs/module-development.md)** - Build custom modules
 - **[API Reference](./docs/api-reference.md)** - API documentation
-- **[Deployment](./docs/deployment.md)** - การ deploy production
+- **[Deployment](./docs/deployment.md)** - Production deployment
 
 ---
 
 ## 🔄 Updating Core
 
-NeonEx Framework ใช้ [neonexcore](https://github.com/neonextechnologies/neonexcore) เป็น dependency ซึ่งจัดเก็บไว้ใน `/core` directory
+NeonEx Framework uses [neonexcore](https://github.com/neonextechnologies/neonexcore) as a dependency, which is stored in the `/core` directory
 
 ### Update Core to Latest Version
 
@@ -359,7 +359,7 @@ See [Core Management Guide](./docs/core-management.md) for details.
 
 ## 🌟 What Can You Build?
 
-NeonEx Framework เหมาะสำหรับสร้าง:
+NeonEx Framework is ideal for building:
 
 - 📝 **RESTful APIs** - Backend services
 - 🌐 **Web Applications** - Full-stack web apps
