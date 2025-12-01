@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Exclude documentation from git archive (for release packages)
+docs/ export-ignore
+.gitbook.yaml export-ignore
